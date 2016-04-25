@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" >
+
+<f:view renderKitId="PRIMEFACES_MOBILE" />
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<pm:page id="first">
+		<pm:header title="Gerenciar Empresas" swatch="b"
+			style="font-size: small" />
+		<div align="center">
+			<h:form enctype="multipart/form-data" style="width:85%"
+				prependId="false">
+				<div>
+					<ui:include src="/templates/menu_con.xhtml" />
+				</div>
+				<p:outputLabel value="Consultar/Atualizar" />
+				<p:messages id="messages" autoUpdate="true">
+				</p:messages>
+				<br />
+				<p:tabView id="guias">
+					<p:tab title="Empresa">
+						<br />
+						<p:outputLabel for="cnpj" value="CNPJ:" />
+						<p:inputText id="cnpj" required="true"
+							requiredMessage="CNPJ obrigatório!" value="#{empresaBean.cnpj}"
+							maxlength="14">
+							<f:ajax event="blur" render="guias"
+								listener="#{empresaBean.buscarEmpresaPorCnpj}" />
+						</p:inputText>
+						<p:outputLabel for="rzsocial" value="Razão Social:" />
+						<p:autoComplete id="rzsocial" minQueryLength="3" maxResults="5"
+							value="#{empresaBean.rzsocial}" required="true"
+							requiredMessage="Razão Social obrigatório!"
+							completeMethod="#{empresaBean.listaEmpresas}" effect="blind">
+							<f:ajax event="blur" render="guias"
+								listener="#{empresaBean.buscarEmpresaPorRazaoSocial}" />
+						</p:autoComplete>
+						<p:outputLabel for="nmfantasia" value="Nome Fantasia:" />
+						<p:inputText id="nmfantasia"
+							requiredMessage="Nome fantasia obrigatório!"
+							value="#{empresaBean.empresa.nomeFantasia}" required="true" />
+						<h:outputLabel for="senha" value="Senha: " />
+						<p:password id="senha" maxlength="10"
+							value="#{empresaBean.empresa.senha}" label="Senha"
+							required="true" requiredMessage="Senha obrigatória!" />
+						<h:outputLabel for="senha2" value="Repita a senha: *" />
+						<p:password id="senha2" maxlength="10"
+							value="#{empresaBean.senha2}" label="Senha 2" required="true"
+							requiredMessage="Repita a Senha obrigatório!" />
+					</p:tab>
+					<p:tab title="Endereço">
+						<br />
+						<p:outputLabel for="cep" value="CEP:" />
+						<p:inputText id="cep" value="#{empresaBean.empresa.endereco.cep}"
+							maxlength="8" required="true" requiredMessage="CEP obrigatório!" />
+						<p:outputLabel for="logradouro" value="Logradouro:" />
+						<p:inputText id="logradouro"
+							value="#{empresaBean.empresa.endereco.logradouro}"
+							required="true" requiredMessage="Logradouro obrigatório!" />
+						<p:outputLabel for="numero" value="Numero:" />
+						<p:inputText id="numero"
+							value="#{empresaBean.empresa.endereco.numero}" required="true"
+							requiredMessage="Número obrigatório!" maxlength="10" />
+						<p:outputLabel for="complemento" value="Complemento:" />
+						<p:inputText id="complemento"
+							value="#{empresaBean.empresa.endereco.complemento}" />
+						<p:outputLabel for="bairro" value="Bairro:" />
+						<p:inputText id="bairro"
+							value="#{empresaBean.empresa.endereco.bairro}" required="true"
+							requiredMessage="Bairro obrigatório!" />
+						<p:outputLabel for="cidade" value="Cidade:" />
+						<p:inputText id="cidade"
+							value="#{empresaBean.empresa.endereco.cidade}" required="true"
+							requiredMessage="Cidade obrigatória!" />
+						<p:outputLabel for="uf" value="UF:" />
+						<p:inputText id="uf" value="#{empresaBean.empresa.endereco.uf}"
+							required="true" maxlength="2" requiredMessage="UF obrigatório!" />
+						<p:commandButton value="Atualizar" style="font-size: small"
+							icon="ui-icon-back" ajax="false"
+							action="#{empresaBean.atualizarEmpresa}" />
+						<p:commandButton value="Limpar Campos" style="font-size: small"
+							icon="ui-icon-delete" ajax="false"
+							action="#{empresaBean.limparCampos}" />
+					</p:tab>
+				</p:tabView>
+			</h:form>
+			<br />
+		</div>
+	</pm:page>
+</h:body>
+
+</html>

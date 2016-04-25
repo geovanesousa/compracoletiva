@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" >
+
+<f:view renderKitId="PRIMEFACES_MOBILE" />
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<pm:page id="first">
+		<pm:header title="Gerenciar Promoções" swatch="b"
+			style="font-size: small" />
+		<div align="center">
+			<h:form enctype="multipart/form-data" style="width:85%"
+				prependId="false">
+				<div>
+					<ui:include src="/templates/menu_con.xhtml" />
+				</div>
+				<p:outputLabel value="Excluir" />
+				<p:messages id="messages" autoUpdate="true">
+				</p:messages>
+				<br />
+				<p:outputLabel for="cod" value="Cód. Promoção:" />
+				<p:inputText id="cod" value="#{promocaoBean.codigo}"  >
+					<f:ajax event="blur" render="cod nome dtinicio dtfim"
+						listener="#{promocaoBean.buscarPromocaoPorCod}" />
+				</p:inputText>
+				<p:outputLabel for="nome" 
+                                       value="Título Promoção:" />
+				<p:autoComplete id="nome" minQueryLength="3" maxResults="5"
+					value="#{promocaoBean.titulo}"
+					completeMethod="#{promocaoBean.listaPromocoes}"
+					effect="blind">
+					<f:ajax event="blur" render="cod nome dtinicio dtfim"
+						listener="#{promocaoBean.buscarPromocaoPorTitulo}" />
+				</p:autoComplete>
+				<p:outputLabel for="dtinicio" value="Data início:" />
+				<p:inputText id="dtinicio" readonly="true" 
+				value="#{promocaoBean.promocao.dataInicio}"  >
+					<f:convertDateTime locale="pt_BR" timeZone="GMT-3" 
+							pattern="dd/MM/yyyy" />
+				</p:inputText>
+				<p:outputLabel for="dtfim" value="Data fim:" />
+				<p:inputText id="dtfim" readonly="true" 
+				value="#{promocaoBean.promocao.dataFim}"  >
+					<f:convertDateTime locale="pt_BR" timeZone="GMT-3" 
+							pattern="dd/MM/yyyy" />
+				</p:inputText>
+				<p:commandButton value="Excluir" style="font-size: small"
+					icon="ui-icon-delete" ajax="false"
+					action="#{promocaoBean.excluirPromocao}" />
+				<p:commandButton value="Limpar Campos" style="font-size: small"
+					icon="ui-icon-delete" ajax="false" action="#{promocaoBean.limparCampos}" />
+			</h:form>
+			<br />
+		</div>
+	</pm:page>
+</h:body>
+
+</html>

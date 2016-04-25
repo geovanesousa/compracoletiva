@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" >
+
+<f:view renderKitId="PRIMEFACES_MOBILE" />
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<pm:page id="first">
+		<pm:header title="Gerenciar Empresas" swatch="b"
+			style="font-size: small" />
+		<div align="center">
+			<h:form enctype="multipart/form-data" style="width:85%"
+				prependId="false">
+				<div>
+					<ui:include src="/templates/menu_con.xhtml" />
+				</div>
+				<p:outputLabel value="Consultar/Atualizar" />
+				<p:messages id="messages" autoUpdate="true">
+				</p:messages>
+				<br />
+				<p:outputLabel for="cnpj" value="CNPJ:" />
+				<p:inputText id="cnpj" required="true"
+					requiredMessage="CNPJ obrigatório!" value="#{empresaBean.cnpj}"
+					maxlength="14">
+					<f:ajax event="blur" render="cnpj rzsocial nmfantasia"
+						listener="#{empresaBean.buscarEmpresaPorCnpj}" />
+				</p:inputText>
+				<p:outputLabel for="rzsocial" value="Razão Social:" />
+				<p:autoComplete id="rzsocial" minQueryLength="3" maxResults="5"
+					value="#{empresaBean.rzsocial}" required="true"
+					requiredMessage="Razão Social obrigatório!"
+					completeMethod="#{empresaBean.listaEmpresas}" effect="blind">
+					<f:ajax event="blur" render="cnpj rzsocial nmfantasia"
+						listener="#{empresaBean.buscarEmpresaPorRazaoSocial}" />
+				</p:autoComplete>
+				<p:outputLabel for="nmfantasia" value="Nome Fantasia:" />
+				<p:inputText id="nmfantasia" readonly="true"
+					requiredMessage="Nome fantasia obrigatório!"
+					value="#{empresaBean.empresa.nomeFantasia}" required="true" />
+				<p:commandButton value="Excluir" style="font-size: small"
+					icon="ui-icon-delete" ajax="false"
+					action="#{empresaBean.excluirEmpresa}" />
+				<p:commandButton value="Limpar Campos" style="font-size: small"
+					icon="ui-icon-delete" ajax="false"
+					action="#{empresaBean.limparCampos}" />
+			</h:form>
+			<br />
+		</div>
+	</pm:page>
+</h:body>
+
+</html>

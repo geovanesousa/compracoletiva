@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" >
+
+<f:view renderKitId="PRIMEFACES_MOBILE" />
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<pm:page id="first">
+		<pm:header title="Gerenciar Consultores" swatch="b"
+			style="font-size: small" />
+		<div align="center">
+			<h:form enctype="multipart/form-data" style="width:85%"
+				prependId="false">
+				<div>
+					<ui:include src="/templates/menu_con.xhtml" />
+				</div>
+				<p:outputLabel value="Excluir" />
+				<p:messages id="messages" autoUpdate="true">
+				</p:messages>
+				<br />
+				<p:outputLabel for="cpf" value="CPF:" />
+				<p:inputText id="cpf" value="#{consultorBean.cpf}" maxlength="11" >
+					<f:ajax event="blur" render="cpf nome login senha senha2"
+						listener="#{consultorBean.buscarConsultorPorCpf}" />
+				</p:inputText>
+				<p:outputLabel for="nome" 
+                                       value="Nome:" />
+				<p:autoComplete id="nome" minQueryLength="3" maxResults="5"
+					value="#{consultorBean.nome}"
+					completeMethod="#{consultorBean.listaConsultores}"
+					effect="blind">
+					<f:ajax event="blur" render="cpf nome login senha senha2"
+						listener="#{consultorBean.buscarConsultorPorNome}" />
+				</p:autoComplete>
+				<h:outputLabel for="senha" value="Senha: " />
+				<p:password id="senha" maxlength="10" readonly="true"
+					value="#{consultorBean.consultor.senha}" label="Senha" />
+				<p:commandButton value="Excluir" style="font-size: small"
+					icon="ui-icon-delete" ajax="false"
+					action="#{consultorBean.excluirConsultor}" />
+				<p:commandButton value="Limpar Campos" style="font-size: small"
+					icon="ui-icon-delete" ajax="false" action="#{consultorBean.limparCampos}" />
+			</h:form>
+			<br />
+		</div>
+	</pm:page>
+</h:body>
+
+</html>

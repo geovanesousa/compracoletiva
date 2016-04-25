@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile">
+
+<f:view renderKitId="PRIMEFACES_MOBILE" />
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<pm:page id="first">
+		<pm:header title="Gerenciar Clientes" swatch="b"
+			style="font-size: small" />
+		<br />
+		<div align="center">
+			<h:form enctype="multipart/form-data" style="width:85%"
+				prependId="false">
+				<p:outputLabel value="Inserir" />
+				<p:messages id="messages" autoUpdate="true">
+				</p:messages>
+				<br />
+				<p:outputLabel for="cpf" value="CPF (somente números):" />
+				<p:inputText id="cpf" maxlength="11" type=""
+					requiredMessage="CPF obrigatório!"
+					value="#{clienteBean.cliente.pessoaFisica.cpf}" required="true" />
+				<p:outputLabel for="nome" value="Nome:" />
+				<p:inputText id="nome" requiredMessage="Nome obrigatório!"
+					value="#{clienteBean.cliente.pessoaFisica.nome}"
+					required="true" />
+				<h:outputLabel for="senha" value="Senha: " />
+				<p:password id="senha" maxlength="10"
+					value="#{clienteBean.cliente.senha}" label="Senha"
+					required="true" requiredMessage="Senha obrigatória!" />
+				<h:outputLabel for="senha2" value="Repita a senha: *" />
+				<p:password id="senha2" maxlength="10"
+					value="#{clienteBean.senha2}" label="Senha 2" required="true"
+					requiredMessage="Repita a Senha obrigatório!" />
+				<p:commandButton value="Inserir" style="font-size: small"
+					icon="ui-icon-arrow-u" ajax="false"
+					action="#{clienteBean.inserirCliente}" />
+				<p:commandButton value="Limpar Campos" style="font-size: small"
+					icon="ui-icon-delete" ajax="false" action="#{clienteBean.limparCampos}" />
+				<p:link outcome="/index.xhtml" value="Voltar" />
+			</h:form>
+			<br />
+		</div>
+	</pm:page>
+</h:body>
+
+</html>

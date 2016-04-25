@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile">
+
+<f:view renderKitId="PRIMEFACES_MOBILE" />
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<pm:page id="first">
+		<pm:header title="Gerenciar Clientes" swatch="b"
+			style="font-size: small" />
+		<br />
+		<div align="center">
+			<h:form enctype="multipart/form-data" style="width:85%"
+				prependId="false">
+				<p:outputLabel value="Consultar/Atualizar" />
+				<p:messages id="messages" autoUpdate="true">
+				</p:messages>
+				<br />
+				<p:outputLabel for="cpf" value="CPF:" />
+				<p:inputText id="cpf" required="true"
+					requiredMessage="CPF obrigatório!" value="#{clienteBean.cpf}" maxlength="11" >
+					<f:ajax event="blur" render="cpf nome login senha senha2"
+						listener="#{clienteBean.buscarClientePorCpf}" />
+				</p:inputText>
+				<p:outputLabel for="nome" 
+                                       value="Nome:" />
+				<p:autoComplete id="nome" minQueryLength="3" maxResults="5"
+					value="#{clienteBean.nome}" required="true" 
+					requiredMessage="NOME obrigatório!"
+					completeMethod="#{clienteBean.listaClientes}"
+					effect="blind">
+					<f:ajax event="blur" render="cpf nome login senha senha2"
+						listener="#{clienteBean.buscarClientePorNome}" />
+				</p:autoComplete>
+				<h:outputLabel for="senha" value="Senha: " />
+				<p:password id="senha" maxlength="10"
+					value="#{clienteBean.cliente.senha}" label="Senha"
+					required="true" requiredMessage="Senha obrigatória!" />
+				<h:outputLabel for="senha2" value="Repita a senha: *" />
+				<p:password id="senha2" maxlength="10"
+					value="#{clienteBean.senha2}" label="Senha 2" required="true"
+					requiredMessage="Repita a Senha obrigatório!" />
+				<p:commandButton value="Atualizar" style="font-size: small"
+					icon="ui-icon-back" ajax="false"
+					action="#{clienteBean.atualizarCliente}" />
+				<p:commandButton value="Limpar Campos" style="font-size: small"
+					icon="ui-icon-delete" ajax="false" action="#{clienteBean.limparCampos}" />
+			</h:form>
+			<br />
+		</div>
+	</pm:page>
+</h:body>
+
+</html>

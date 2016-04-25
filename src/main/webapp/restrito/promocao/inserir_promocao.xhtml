@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" >
+
+<f:view renderKitId="PRIMEFACES_MOBILE" />
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<pm:page id="first">
+		<pm:header title="Gerenciar Promoções" swatch="b"
+			style="font-size: small" />
+		<div align="center">
+			<h:form enctype="multipart/form-data" style="width:85%"
+				prependId="false">
+				<div>
+					<ui:include src="/templates/menu_con.xhtml" />
+				</div>
+				<p:outputLabel value="Inserir" />
+				<p:messages id="messages" autoUpdate="true">
+				</p:messages>
+				<br />
+				<p:tabView>
+					<p:tab title="Dados">
+						<br />
+						<p:outputLabel for="cod" value="Cód. Promoção:" />
+						<p:inputText id="cod" readonly="true"
+							value="#{promocaoBean.promocao.id}" />
+						<p:outputLabel for="titulo" value="Título:" />
+						<p:inputText id="titulo" requiredMessage="Título obrigatório!"
+							value="#{promocaoBean.promocao.titulo}" required="true" />
+						<p:outputLabel for="mincompras" value="Mínimo de Compras:" />
+						<p:inputText id="mincompras"
+							requiredMessage="Mínimo de Compras obrigatório!"
+							value="#{promocaoBean.promocao.minimoCompras}" required="true" />
+						<p:outputLabel for="descricao" value="Descrição:" />
+						<p:inputTextarea id="descricao"
+							requiredMessage="Descrição obrigatória!"
+							value="#{promocaoBean.promocao.descricao}" maxlength="250"
+							required="true" />
+					</p:tab>
+					<p:tab title="Outros Dados">
+						<br />
+						<p:outputLabel for="dtinicio" value="Data início (dd/mm/aaaa):" />
+						<p:inputText id="dtinicio" maxlength="10"
+							requiredMessage="Data início obrigatória!"
+							value="#{promocaoBean.promocao.dataInicio}" required="true">
+							<f:convertDateTime locale="pt_BR" timeZone="GMT-3" 
+							pattern="dd/MM/yyyy" />
+						</p:inputText>
+						<p:outputLabel for="dtfim" value="Data fim (apenas visualização):" />
+						<p:inputText id="dtfim" maxlength="10" readonly="true"
+							requiredMessage="Data fim obrigatória!"
+							value="#{promocaoBean.promocao.dataFim}" required="true">
+							<f:convertDateTime locale="pt_BR" timeZone="GMT-3"
+								pattern="dd/MM/yyyy" />
+						</p:inputText>
+						<p:outputLabel for="cnpj" value="Empresa ofertante (CNPJ):" />
+						<p:autoComplete id="cnpj" minQueryLength="3" maxResults="5"
+							value="#{promocaoBean.cnpj}" required="true"
+							requiredMessage="CNPJ obrigatório!" maxlength="14"
+							completeMethod="#{promocaoBean.listaEmpresas}" effect="blind" />
+						<p:outputLabel for="pcnormal" value="Preço normal R$:" />
+						<p:inputText id="pcnormal"
+							requiredMessage="Preço normal obrigatório!"
+							value="#{promocaoBean.promocao.precoNormal}" required="true" />
+						<p:outputLabel for="pcdesc" value="Preço com desconto R$:" />
+						<p:inputText id="pcdesc"
+							requiredMessage="Preço com desconto obrigatório!"
+							value="#{promocaoBean.promocao.precoDesconto}" required="true" />
+						<p:commandButton value="Inserir" style="font-size: small"
+							icon="ui-icon-arrow-u" ajax="false"
+							action="#{promocaoBean.inserirPromocao}" />
+						<p:commandButton value="Limpar Campos" style="font-size: small"
+							icon="ui-icon-delete" ajax="false"
+							action="#{promocaoBean.limparCampos}" />
+					</p:tab>
+				</p:tabView>
+			</h:form>
+			<br />
+		</div>
+	</pm:page>
+</h:body>
+
+</html>

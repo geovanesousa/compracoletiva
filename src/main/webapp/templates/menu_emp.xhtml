@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	<pm:content styleClass="jqm-content">
+		<p:commandButton id="btn-basic" value="Menu" type="button" />
+	</pm:content>
+	<p:overlayPanel for="btn-basic" widgetVar="pnl-basic" at="left"
+		showEffect="overlay">
+		<h2>Opções de consultor</h2>
+		<p:menu>
+			<p:submenu label="Gerenciar Cupons">
+				<p:menuitem value="Consumir cupom" />
+				<p:menuitem value="Consultar cupom" />
+				<p:submenu label="Ir para">
+				<p:menuitem value="Página inicial" url="/faces/restrito/empresa/bv_emp.xhtml" />
+			</p:submenu>
+		</p:menu>
+	</p:overlayPanel>
+</ui:composition>

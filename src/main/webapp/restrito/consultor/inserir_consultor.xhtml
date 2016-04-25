@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" >
+
+<f:view renderKitId="PRIMEFACES_MOBILE" />
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<pm:page id="first">
+		<pm:header title="Gerenciar Consultores" swatch="b"
+			style="font-size: small" />
+		<div align="center">
+			<h:form enctype="multipart/form-data" style="width:85%"
+				prependId="false">
+				<div>
+					<ui:include src="/templates/menu_con.xhtml" />
+				</div>
+				<p:outputLabel value="Inserir" />
+				<p:messages id="messages" autoUpdate="true">
+				</p:messages>
+				<br />
+				<p:outputLabel for="cpf" value="CPF (somente números):" />
+				<p:inputText id="cpf" maxlength="11" type=""
+					requiredMessage="CPF obrigatório!"
+					value="#{consultorBean.consultor.pessoaFisica.cpf}" required="true" />
+				<p:outputLabel for="nome" value="Nome:" />
+				<p:inputText id="nome" requiredMessage="Nome obrigatório!"
+					value="#{consultorBean.consultor.pessoaFisica.nome}"
+					required="true" />
+				<h:outputLabel for="senha" value="Senha: " />
+				<p:password id="senha" maxlength="10"
+					value="#{consultorBean.consultor.senha}" label="Senha"
+					required="true" requiredMessage="Senha obrigatória!" />
+				<h:outputLabel for="senha2" value="Repita a senha: *" />
+				<p:password id="senha2" maxlength="10"
+					value="#{consultorBean.senha2}" label="Senha 2" required="true"
+					requiredMessage="Repita a Senha obrigatório!" />
+				<p:commandButton value="Inserir" style="font-size: small"
+					icon="ui-icon-arrow-u" ajax="false"
+					action="#{consultorBean.inserirConsultor}" />
+				<p:commandButton value="Limpar Campos" style="font-size: small"
+					icon="ui-icon-delete" ajax="false" action="#{consultorBean.limparCampos}" />
+			</h:form>
+			<br />
+		</div>
+	</pm:page>
+</h:body>
+
+</html>

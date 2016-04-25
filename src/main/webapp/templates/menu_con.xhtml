@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	<pm:content styleClass="jqm-content">
+		<p:commandButton id="btn-basic" value="Menu" type="button" />
+	</pm:content>
+	<p:overlayPanel for="btn-basic" widgetVar="pnl-basic" at="left"
+		showEffect="overlay">
+		<h2>Opções de consultor</h2>
+		<p:menu>
+			<p:submenu label="Gerenciar Consultores">
+				<p:menuitem value="Inserir"
+					url="/faces/restrito/consultor/inserir_consultor.xhtml" />
+				<p:menuitem value="Consultar/Atualizar"
+					url="/faces/restrito/consultor/atualizar_consultor.xhtml" />
+				<p:menuitem value="Excluir"
+					url="/faces/restrito/consultor/excluir_consultor.xhtml" />
+			</p:submenu>
+			<p:submenu label="Gerenciar Empresas">
+				<p:menuitem value="Inserir"
+					url="/faces/restrito/empresa/inserir_empresa.xhtml" />
+				<p:menuitem value="Consultar/Atualizar"
+					url="/faces/restrito/empresa/atualizar_empresa.xhtml" />
+				<p:menuitem value="Excluir"
+					url="/faces/restrito/empresa/excluir_empresa.xhtml" />
+			</p:submenu>
+			<p:submenu label="Gerenciar Promoções">
+				<p:menuitem value="Inserir"
+					url="/faces/restrito/promocao/inserir_promocao.xhtml" />
+				<p:menuitem value="Consultar/Atualizar"
+					url="/faces/restrito/promocao/atualizar_promocao.xhtml" />
+				<p:menuitem value="Excluir"
+					url="/faces/restrito/promocao/excluir_promocao.xhtml" />
+			</p:submenu>
+			<p:submenu label="Ir para">
+				<p:menuitem value="Página inicial" url="/faces/restrito/consultor/bv_con.xhtml" />
+			</p:submenu>
+		</p:menu>
+	</p:overlayPanel>
+</ui:composition>

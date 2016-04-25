@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile">
+
+<f:view renderKitId="PRIMEFACES_MOBILE" />
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<pm:page id="first" >
+		<pm:header title="Página de Login" swatch="b" style="font-size: small" />
+		<div align="left" style="width: 85%">
+			<h:form>
+				<p:link outcome="/restrito/cliente/inserir_cliente.xhtml" 
+				value="Cadastre-se" />
+			</h:form>
+		</div>
+		<br />
+		<div align="center">
+			<h:form enctype="multipart/form-data" style="width:85%"
+				prependId="false">
+				<p:messages id="messages" autoUpdate="true">
+				</p:messages>
+				<br />
+				<h:graphicImage value="/images/otavio.jpg" />
+				<br />
+				<br />
+				<p:outputLabel for="login" value="CPF OU CNPJ:" />
+				<p:inputText id="login" required="true"
+					requiredMessage="Login obrigatório!" value="#{loginBean.login}"
+					maxlength="14" />
+				<h:outputLabel for="senha" value="Senha: *" />
+				<p:password id="senha" label="Senha" required="true"
+					requiredMessage="Senha obrigatória" value="#{loginBean.senha}" maxlength="10" />
+				<p:commandButton value="FAZER LOGIN" style="font-size: small"
+					icon="ui-icon-arrow-u" action="#{loginBean.autenticar}"
+					ajax="false" />
+			</h:form>
+			<br />
+		</div>
+	</pm:page>
+</h:body>
+
+</html>

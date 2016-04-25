@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<f:view renderKitId="PRIMEFACES_MOBILE" />
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<pm:page id="first">
+		<pm:header title="Cupom" swatch="b" style="font-size: small" />
+		<div align="left" style="width: 85%">
+			<h:form>
+				<p:link outcome="/login.xhtml" value="Sou cadastrado" />
+			</h:form>
+		</div>
+
+		<div align="center">
+			<h:form enctype="multipart/form-data" style="width:85%"
+				prependId="false">
+				<div>
+                        <ui:include src="/templates/menu_cli.xhtml" />
+                    </div>
+				<br />
+				<p:messages id="messages" autoUpdate="true" />
+				<br />
+					<p:panel id="painelOferta" rendered="#{promocaoBean.promocao.titulo!=null}"  
+					header="#{promocaoBean.promocao.titulo}" toggleable="true">
+						<h:outputText value="#{promocaoBean.promocao.descricao}" />
+						<h:outputText value=" | Cód. Promoção: #{promocaoBean.promocao.id}" />
+						<h:outputText value=" | Preço normal R$: #{promocaoBean.promocao.precoNormal}" />
+						<h:outputText value=" | Preço com desconto R$: #{promocaoBean.promocao.precoDesconto}" />
+						<p:outputLabel 
+                                value=" | Data da compra: #{promocaoBean.compra.data}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </p:outputLabel>
+                        <p:outputLabel 
+                                value=" | Início da validade do cupom: #{promocaoBean.cupom.dataInicio}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </p:outputLabel>
+                        <p:outputLabel 
+                                value=" | Cupom válido até: #{promocaoBean.cupom.dataFim}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </p:outputLabel>
+                        <h:outputText value=" | Número do cartão: #{promocaoBean.pgCartao.numeroCartao}" />
+                        <h:outputText value=" | CPF do cliente: 
+                        #{promocaoBean.compra.cliente.pessoaFisica.cpf}" />
+                        <h:outputText value=" | Nome do cliente: 
+                        #{promocaoBean.compra.cliente.pessoaFisica.nome}" />
+						</p:panel>
+						<p:outputLabel value="Imprimir Cupom: "/>
+                		<button type="button" onclick="window.print();"> imprimir</button>
+						<p:commandButton value="Atualizar" style="font-size: small"
+							icon="ui-icon-back" ajax="false"
+							action="#{promocaoBean.voltar}" />
+				</h:form>
+			<br />
+
+		</div>
+	</pm:page>
+</h:body>
+
+</html>
